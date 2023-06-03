@@ -19,6 +19,7 @@ import java.util.List;
 @Access(AccessType.FIELD) // JPA 의 매핑처리 방식은 FIELD 와 PROPERTY 가 있는데 PROPERTY 방식은 public get/set 을 필요로 한다.
 public class Order {
 
+    // 식별자임을 강조하기 위해, @EmbeddedId 를 사용한다.
     @EmbeddedId
     private OrderNo no;
 
@@ -43,6 +44,8 @@ public class Order {
     //@Convert(converter = MoneyAttributeConverter.class)
     @Column(name = "total_amounts")
     private Money totalAmounts;
+
+    protected Order(){}
 
     public void cancel() {
 
