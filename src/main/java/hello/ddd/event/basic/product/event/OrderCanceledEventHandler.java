@@ -5,6 +5,7 @@ import hello.ddd.event.basic.product.domain.EventProduct;
 import hello.ddd.event.basic.product.domain.EventProductRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,8 +21,13 @@ public class OrderCanceledEventHandler {
         this.productRepository = productRepository;
     }
 
+    /**
+     * @Async : EventListener 를 비동기 처리한다는 의미
+     */
+    @Async
     @EventListener(OrderCancelEvent.class)
-    public void handler(OrderCancelEvent event) {
+    public void handler(OrderCancelEvent event) throws InterruptedException {
+        Thread.sleep(2000);
         log.info("EVENT HANDLER CALLED! => event={}", event.toString());
         EventProduct product = productRepository.findById(event.getProductId());
         product.increaseQuantity(event.getQuantity());
