@@ -18,4 +18,10 @@ public class OrderNo implements Serializable {
      * 식별자 내에 기능을 구현할 수 있다는 장점이 있다.
      */
     // 식별자에 관련된 기능/검증 로직을 구현할 때 해당 클래스에 구현할 수 있다.
+
+    protected OrderNo(){}
+
+    public OrderNo(String number) {
+        this.number = number;
+    }
 }
